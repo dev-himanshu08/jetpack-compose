@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.app.compose.ui.theme.JetpackComposeTheme
+import com.app.compose.ui.theme.Typography
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +22,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetpackComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    Column(
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    ) {
+                        Greeting("Android")
+                        CustomText("Hi Himanshu")
+                    }
                 }
             }
         }
@@ -38,10 +42,21 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+@Composable
+fun CustomText(text: String) {
+    Text(
+        text = text,
+        style = Typography.headlineLarge
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     JetpackComposeTheme {
-        Greeting("Android")
+        Column {
+            Greeting("Android")
+            CustomText("Hi Himanshu")
+        }
     }
 }
